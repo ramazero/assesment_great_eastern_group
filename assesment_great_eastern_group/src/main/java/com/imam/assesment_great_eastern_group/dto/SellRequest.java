@@ -8,6 +8,9 @@ import lombok.Data;
 public class SellRequest {
 
     @NotNull
+    private Long variantId;
+
+    @NotNull
     @Min(1)
     private Integer quantity;
 }

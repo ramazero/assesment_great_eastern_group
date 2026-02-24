@@ -2,6 +2,7 @@ package com.imam.assesment_great_eastern_group.service;
 
 import com.imam.assesment_great_eastern_group.entity.Item;
 import com.imam.assesment_great_eastern_group.repository.ItemRepository;
+import com.imam.assesment_great_eastern_group.repository.VariantRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,6 +14,7 @@ import java.util.List;
 public class ItemService {
 
     private final ItemRepository itemRepository;
+    private final VariantRepository variantRepository;
 
     @Transactional
     public Item createItem(String name) {
@@ -38,6 +40,14 @@ public class ItemService {
 
     @Transactional
     public void deleteItem(Long id) {
-        itemRepository.deleteById(id);
+
+        Item item = itemRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Item not found"));
+
+        if (variantRepository.existsByItemId(id)) {
+            throw new RuntimeException("Cannot delete item with existing variants");
+        }
+
+        itemRepository.delete(item);
     }
 }
