@@ -1,5 +1,6 @@
 package com.imam.assesment_great_eastern_group.service;
 
+import com.imam.assesment_great_eastern_group.dto.ItemResponse;
 import com.imam.assesment_great_eastern_group.entity.Item;
 import com.imam.assesment_great_eastern_group.repository.ItemRepository;
 import com.imam.assesment_great_eastern_group.repository.VariantRepository;
@@ -17,7 +18,8 @@ public class ItemService {
     private final VariantRepository variantRepository;
 
     @Transactional
-    public Item createItem(String name) {
+    public ItemResponse createItem(String name) {
+
         if (itemRepository.existsByName(name)) {
             throw new RuntimeException("Item already exists");
         }
@@ -26,7 +28,13 @@ public class ItemService {
                 .name(name)
                 .build();
 
-        return itemRepository.save(item);
+        Item saved = itemRepository.save(item);
+
+        return new ItemResponse(
+                saved.getId(),
+                saved.getName(),
+                saved.getCreatedAt()
+        );
     }
 
     public List<Item> getAllItems() {

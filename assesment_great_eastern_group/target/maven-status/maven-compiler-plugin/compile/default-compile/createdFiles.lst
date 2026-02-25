@@ -11,6 +11,7 @@ com\imam\assesment_great_eastern_group\entity\Item.class
 com\imam\assesment_great_eastern_group\entity\Variant.class
 com\imam\assesment_great_eastern_group\controller\VariantController.class
 com\imam\assesment_great_eastern_group\dto\CreateVariantRequest.class
+com\imam\assesment_great_eastern_group\dto\ItemResponse.class
 com\imam\assesment_great_eastern_group\AssesmentGreatEasternGroupApplication.class
 com\imam\assesment_great_eastern_group\entity\Sale.class
 com\imam\assesment_great_eastern_group\repository\SaleRepository.class

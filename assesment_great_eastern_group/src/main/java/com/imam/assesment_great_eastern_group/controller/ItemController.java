@@ -1,6 +1,7 @@
 package com.imam.assesment_great_eastern_group.controller;
 
 import com.imam.assesment_great_eastern_group.dto.CreateItemRequest;
+import com.imam.assesment_great_eastern_group.dto.ItemResponse;
 import com.imam.assesment_great_eastern_group.entity.Item;
 import com.imam.assesment_great_eastern_group.service.ItemService;
 import jakarta.validation.Valid;
@@ -18,9 +19,10 @@ public class ItemController {
     private final ItemService itemService;
 
     @PostMapping
-    public Item createItem(@RequestBody @Valid CreateItemRequest request) {
+    public ItemResponse createItem(@RequestBody @Valid CreateItemRequest request) {
         return itemService.createItem(request.getName());
     }
+
 
     @GetMapping
     public List<Item> getAllItems() {
